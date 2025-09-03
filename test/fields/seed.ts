@@ -13,6 +13,7 @@ import { blocksDoc } from './collections/Blocks/shared.js'
 import { codeDoc } from './collections/Code/shared.js'
 import { collapsibleDoc } from './collections/Collapsible/shared.js'
 import { conditionalLogicDoc } from './collections/ConditionalLogic/shared.js'
+import { seedCustomFilterData } from './collections/CustomFilter/seed.js'
 import { customRowID, customTabID, nonStandardID } from './collections/CustomID/shared.js'
 import { dateDoc } from './collections/Date/shared.js'
 import { anotherEmailDoc, emailDoc } from './collections/Email/shared.js'
@@ -385,6 +386,9 @@ export const seed = async (_payload: Payload) => {
       depth: 0,
     }),
   ])
+
+  // Seed custom filter test data
+  await seedCustomFilterData(_payload)
 }
 
 export async function clearAndSeedEverything(_payload: Payload) {

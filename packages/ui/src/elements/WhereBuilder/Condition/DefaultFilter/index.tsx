@@ -16,7 +16,7 @@ import { RelationshipFilter } from '../Relationship/index.js'
 import { Select } from '../Select/index.js'
 import { Text } from '../Text/index.js'
 
-type Props = {
+export type DefaultFilterProps = {
   booleanSelect: boolean
   disabled: boolean
   filterOptions: ResolvedFilterOptions
@@ -27,7 +27,7 @@ type Props = {
   value: Value
 }
 
-export const DefaultFilter: React.FC<Props> = ({
+export const DefaultFilter: React.FC<DefaultFilterProps> = ({
   booleanSelect,
   disabled,
   filterOptions,
