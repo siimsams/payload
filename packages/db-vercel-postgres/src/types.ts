@@ -1,14 +1,15 @@
-import type { Pool, PoolConfig } from '@neondatabase/serverless'
 import type {
   BasePostgresAdapter,
   GenericEnum,
   MigrateDownArgs,
   MigrateUpArgs,
+  PostgresDB,
   PostgresSchemaHook,
 } from '@payloadcms/drizzle/postgres'
 import type { DrizzleAdapter } from '@payloadcms/drizzle/types'
+import type { VercelPool, VercelPostgresPoolConfig } from '@vercel/postgres'
 import type { DrizzleConfig } from 'drizzle-orm'
-import type { NeonDatabase } from 'drizzle-orm/neon-serverless'
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres'
 import type { PgSchema, PgTableFn, PgTransactionConfig } from 'drizzle-orm/pg-core'
 
 export type Args = {
@@ -44,8 +45,10 @@ export type Args = {
   disableCreateDatabase?: boolean
   extensions?: string[]
   /**
-   * By default, we connect to a local database using the `pg` module instead of `@neondatabase/serverless`.
-   * If you still want to use `@neondatabase/serverless` even locally you can pass `true` here.
+   * By default, we connect to a local database using the `pg` module instead of `@vercel/postgres`.
+   * This is because `@vercel/postgres` doesn't work with local databases.
+   * If you still want to use `@vercel/postgres` even locally you can pass `true` here
+   * and you'd to spin up the database with a special Neon's Docker Compose setup - https://vercel.com/docs/storage/vercel-postgres/local-development#option-2:-local-postgres-instance-with-docker
    */
   forceUseVercelPostgres?: boolean
   /** Generated schema from payload generate:db-schema file path */
@@ -55,10 +58,10 @@ export type Args = {
   logger?: DrizzleConfig['logger']
   migrationDir?: string
   /**
-   * Optional pool configuration
-   * If not provided, will attempt to use the Vercel/Neon environment variables
+   * Optional pool configuration for Vercel Postgres
+   * If not provided, vercel/postgres will attempt to use the Vercel environment variables
    */
-  pool?: PoolConfig
+  pool?: VercelPostgresPoolConfig
   prodMigrations?: {
     down: (args: MigrateDownArgs) => Promise<void>
     name: string
@@ -93,12 +96,12 @@ type ResolveSchemaType<T> = 'schema' extends keyof T
   ? T['schema']
   : GeneratedDatabaseSchema['schemaUntyped']
 
-type Drizzle = NeonDatabase<ResolveSchemaType<GeneratedDatabaseSchema>>
+type Drizzle = NodePgDatabase<ResolveSchemaType<GeneratedDatabaseSchema>>
 
 export type VercelPostgresAdapter = {
   drizzle: Drizzle
   forceUseVercelPostgres?: boolean
-  pool?: Pool
+  pool?: VercelPool
   poolOptions?: Args['pool']
 } & BasePostgresAdapter
 
@@ -123,7 +126,7 @@ declare module 'payload' {
     localesSuffix?: string
     logger: DrizzleConfig['logger']
     pgSchema?: { table: PgTableFn } | PgSchema
-    pool: Pool
+    pool: VercelPool
     poolOptions: Args['pool']
     prodMigrations?: {
       down: (args: MigrateDownArgs) => Promise<void>

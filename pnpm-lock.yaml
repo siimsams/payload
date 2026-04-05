@@ -469,12 +469,12 @@ importers:
 
   packages/db-vercel-postgres:
     dependencies:
-      '@neondatabase/serverless':
-        specifier: ^1.0.2
-        version: 1.0.2
       '@payloadcms/drizzle':
         specifier: workspace:*
         version: link:../drizzle
+      '@vercel/postgres':
+        specifier: ^0.10.0
+        version: 0.10.0(utf-8-validate@6.0.6)
       console-table-printer:
         specifier: 2.12.1
         version: 2.12.1
@@ -18549,12 +18549,12 @@ snapshots:
   '@neondatabase/serverless@0.9.5':
     dependencies:
       '@types/pg': 8.11.6
-    optional: true
 
   '@neondatabase/serverless@1.0.2':
     dependencies:
       '@types/node': 22.19.9
       '@types/pg': 8.20.0
+    optional: true
 
   '@next/bundle-analyzer@16.2.1(bufferutil@4.1.0)(utf-8-validate@6.0.6)':
     dependencies:
@@ -21427,7 +21427,6 @@ snapshots:
       '@types/node': 22.19.9
       pg-protocol: 1.13.0
       pg-types: 4.1.0
-    optional: true
 
   '@types/pg@8.20.0':
     dependencies:
@@ -21781,7 +21780,6 @@ snapshots:
       ws: 8.20.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
     transitivePeerDependencies:
       - utf-8-validate
-    optional: true
 
   '@vitejs/plugin-react@4.5.2(vite@7.3.1(@types/node@22.19.9)(jiti@2.6.1)(lightningcss@1.30.2)(sass-embedded@1.98.0)(sass@1.98.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
@@ -22619,7 +22617,6 @@ snapshots:
   bufferutil@4.1.0:
     dependencies:
       node-gyp-build: 4.8.4
-    optional: true
 
   builtins@5.1.0:
     dependencies:
@@ -26458,8 +26455,7 @@ snapshots:
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
 
-  node-gyp-build@4.8.4:
-    optional: true
+  node-gyp-build@4.8.4: {}
 
   node-gyp@12.2.0:
     dependencies:
@@ -26578,8 +26574,7 @@ snapshots:
 
   obliterator@1.6.1: {}
 
-  obuf@1.1.2:
-    optional: true
+  obuf@1.1.2: {}
 
   obug@2.1.1: {}
 
@@ -26781,8 +26776,7 @@ snapshots:
 
   pg-int8@1.0.1: {}
 
-  pg-numeric@1.0.2:
-    optional: true
+  pg-numeric@1.0.2: {}
 
   pg-pool@3.13.0(pg@8.16.3):
     dependencies:
@@ -26811,7 +26805,6 @@ snapshots:
       postgres-date: 2.1.0
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
-    optional: true
 
   pg@8.16.3:
     dependencies:
@@ -26949,30 +26942,25 @@ snapshots:
 
   postgres-array@2.0.0: {}
 
-  postgres-array@3.0.4:
-    optional: true
+  postgres-array@3.0.4: {}
 
   postgres-bytea@1.0.1: {}
 
   postgres-bytea@3.0.0:
     dependencies:
       obuf: 1.1.2
-    optional: true
 
   postgres-date@1.0.7: {}
 
-  postgres-date@2.1.0:
-    optional: true
+  postgres-date@2.1.0: {}
 
   postgres-interval@1.2.0:
     dependencies:
       xtend: 4.0.2
 
-  postgres-interval@3.0.0:
-    optional: true
+  postgres-interval@3.0.0: {}
 
-  postgres-range@1.1.4:
-    optional: true
+  postgres-range@1.1.4: {}
 
   prebuild-install@7.1.3:
     dependencies:
